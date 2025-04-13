@@ -1,4 +1,4 @@
-export default interface Item {
+export default interface MangaItem {
   id: number;
   kind: string;
   name: string;
@@ -8,7 +8,11 @@ export default interface Item {
   url: string;
   image: Image;
   aired_on: string;
+  released_on: string | null; // Может быть null
+  volumes: number | null; // Может быть null
+  chapters: number | null; // Может быть null
 }
+
 interface Image {
   original: string;
   preview: string;
