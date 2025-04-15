@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import { validate } from '../../utils/validate';
+import { signInWithGoogle } from '../../firebase/service/google';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setAuth } from '../../slices/UserSlice/UserSlice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -7,17 +11,54 @@ const Login = () => {
   const [errors, setErrors] = useState<{ email?: string; password?: string }>(
     {},
   );
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate(email, password, setErrors)) {
       console.log('Форма отправлена', { email, password });
     }
   };
-
+  const handleLogin = async () => {
+    try {
+      const { accessToken, displayName, email, photoURL, uid } =
+        await signInWithGoogle();
+      console.log(
+        'Пользователь вошёл:',
+        accessToken,
+        displayName,
+        email,
+        photoURL,
+        uid,
+      );
+      const userData = {
+        isAuth: true,
+        displayName,
+        email,
+        photoURL,
+        uid,
+      };
+      localStorage.setItem('accessToken', accessToken);
+      // Здесь можно сохранить данные пользователя в глобальное состояние
+      // или перенаправить на защищённый маршрут
+      dispatch(setAuth(userData));
+      navigate('/');
+    } catch (error) {
+      console.error('Ошибка авторизации:', error);
+    }
+  };
   return (
     <div className="flex items-center justify-center min-h-screen bg-[#1E1E1E]">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <div>
+          <h2>Вход в приложение</h2>
+          <button
+            onClick={handleLogin}
+            className="px-4 py-3 border-2 rounded-3xl bg-amber-800 cursor-pointer"
+          >
+            Войти через Google
+          </button>
+        </div>
         <h1 className="text-2xl font-bold mb-6 text-center">Вход</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

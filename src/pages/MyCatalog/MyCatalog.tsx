@@ -30,7 +30,7 @@ const MyCatalog = () => {
   if (isLoading) <Spinner />;
   return (
     <div className="flex pb-10  bg-[#1E1E1E] relative ">
-      <div className="w-3/4">
+      <div className="w-full lg:w-3/4">
         <AnimeCardList
           loading={isLoading}
           items={items}
@@ -39,8 +39,8 @@ const MyCatalog = () => {
           handlePageChange={handlePageChange}
         />
       </div>
-      <aside className="w-1/4 bg-gray-800 text-white p-4 sticky top-0 h-screen overflow-hidden">
-        <h2 className="text-xl font-bold mb-4">Сайдбар</h2>
+      <aside className="w-1/4 bg-gray-800 text-white p-4 sticky top-0 h-screen overflow-hidden lg:block hidden ">
+        <h2 className="text-xs lg:text-xl font-bold mb-4">Сайдбар</h2>
         <JenresList jenres={jenres} isJenreLoading={isJenreLoading} />
       </aside>
     </div>

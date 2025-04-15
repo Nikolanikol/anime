@@ -21,8 +21,9 @@ const Jenres = () => {
     dispatch(fetchJenres());
   }, []);
   if (isJenreLoading) <Spinner />;
+  if (!jenres) return <div>No data</div>;
   return (
-    <div className="bg-gray-800 h-[100vh] overflow-hidden">
+    <div className="bg-gray-800 min-h-[100vh] overflow-scroll pb-[100px]">
       <div className=" items-center justify-center h-full">
         <div className="py-10">
           <h1 className="text-white text-6xl mb-4 font-bold mx-auto text-center">

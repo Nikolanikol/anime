@@ -23,7 +23,7 @@ const AnimeCardList: React.FC<{
 
   return (
     <div className="px-4 pt-3 bg-[#1E1E1E] ">
-      <div className="mx-auto grid-cols-4 grid gap-x-3 gap-y-3">
+      <div className="mx-auto  grid-cols-4  lg:grid-cols-4 grid gap-x-3 gap-y-3">
         {items.map(({ name, id, image }) => {
           return (
             <AnimeCard

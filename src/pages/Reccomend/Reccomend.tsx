@@ -55,7 +55,7 @@ const Reccomend = () => {
   }, []);
   if (loading) <div>loading</div>;
   return (
-    <div className="bg-[#1E1E1E] py-10 flex flex-col gap-y-11 ">
+    <div className="bg-[#1E1E1E] py-10 flex flex-col gap-y-11 min-h-[100vh] pb-8 ">
       <MangaRow data={popular} title={'Популярные'} titleColor="text-white" />
       <MangaRow data={ranked} title={'По рейтингу'} titleColor="text-white" />
       <MangaRow data={aired} title={'По дате релиза'} titleColor="text-white" />
